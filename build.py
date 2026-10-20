@@ -293,7 +293,7 @@ def footer(articles: list[dict]) -> str:
     </div>
     <div class="footer-bottom">
       <p>© {year} Liv Curty · Olivia Curty</p>
-      <p><a href="~/mentions-legales/">Mentions légales &amp; confidentialité</a></p>
+      <p><a href="~/mentions-legales/">Mentions légales &amp; confidentialité</a> · <a href="~/admin/" rel="nofollow">Espace admin</a></p>
     </div>
   </div>
 </footer>"""
