@@ -15,7 +15,7 @@ import json
 import math
 import re
 import shutil
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -29,16 +29,6 @@ SITE_URL = "https://andresgiadas.github.io/intro-python"
 SITE_UPDATED = "2026-10-20"
 HOSTING = "GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis)"
 
-BRAND = {
-    "name": "Liv Curty",
-    "person": "Olivia Curty",
-    "job": "Conseillère en image & style",
-    "email": "oliviacurty@outlook.com",
-    "phone": "+41 76 212 56 52",
-    "phone_href": "+41762125652",
-    "city": "Genève",
-    "tagline": "Conseil en image & style à Genève et en ligne",
-}
 
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
@@ -68,154 +58,43 @@ MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
           "août", "septembre", "octobre", "novembre", "décembre"]
 
 # --------------------------------------------------------------------------
-# Contenus : prestations (repris du Guide de Services)
+# Contenus modifiables depuis l'admin : src/content/settings.json
 # --------------------------------------------------------------------------
 
-SERVICES = [
-    {
-        "slug": "conseil-en-image-geneve",
-        "name": "Conseil en image & style",
-        "h1": "Conseil en image & style à Genève",
-        "seo_title": "Conseil en image & style à Genève",
-        "description": "Conseil en image & style à Genève ou en ligne : questionnaire, entretien, colorimétrie, coupes et silhouettes, guide personnalisé. Dès CHF 320.–.",
-        "format": ["En ligne", "Présentiel à Genève"],
-        "duration": "2 à 3 heures",
-        "prices": [(320, "en ligne"), (390, "en présentiel à Genève")],
-        "image": "style-tailleur-orange",
-        "image_alt": "Femme en tailleur orange vif et haut zébré, lunettes de soleil à la main",
-        "lead": "Un accompagnement personnalisé pour construire une image en accord avec votre personnalité, votre mode de vie et vos objectifs.",
-        "included": [
-            "Un questionnaire préparatoire",
-            "Un entretien individuel approfondi",
-            "La définition de vos objectifs d’image",
-            "Une analyse de colorimétrie personnelle",
-            "Des conseils sur les coupes, les silhouettes et les proportions",
-            "Des suggestions de vêtements adaptés à votre style",
-            "Un guide personnalisé avec des recommandations et les prochaines étapes",
-        ],
-        "for_whom": [
-            "Vous traversez une transition : nouveau poste, reconversion, retour à l’emploi ou création d’entreprise.",
-            "Votre armoire est pleine, mais vous avez souvent l’impression de n’avoir rien à vous mettre.",
-            "Vous souhaitez gagner en présence et en assurance, au travail comme au quotidien.",
-            "Vous vous installez à Genève et voulez adapter votre image à un nouvel environnement.",
-        ],
-        "steps": [
-            ("Questionnaire préparatoire", "Quelques questions pour cerner votre quotidien, vos envies et vos objectifs avant la séance."),
-            ("Entretien approfondi", "Nous échangeons sur votre parcours, votre mode de vie et l’image que vous souhaitez transmettre, puis nous définissons vos objectifs d’image."),
-            ("Analyse & conseils", "Colorimétrie personnelle, coupes, silhouettes et proportions : nous identifions ce qui vous met naturellement en valeur."),
-            ("Votre guide personnalisé", "Vous repartez avec des recommandations concrètes, des suggestions de vêtements adaptés à votre style et les prochaines étapes."),
-        ],
-        "faq": [
-            ("Quelle différence entre un conseil en image et un relooking ?",
-             "Un relooking se concentre souvent sur un changement d’apparence ponctuel. Le conseil en image est une démarche plus globale : il aligne votre apparence, votre comportement et votre communication avec votre personnalité et vos objectifs, pour des repères durables."),
-            ("La séance en ligne est-elle aussi complète qu’en présentiel ?",
-             "Le contenu est le même : questionnaire, entretien, colorimétrie, conseils de coupes et de proportions, suggestions de vêtements et guide personnalisé. Le présentiel à Genève permet simplement d’échanger en face à face."),
-            ("Dois-je racheter toute ma garde-robe ?",
-             "Non. L’objectif est de mieux utiliser ce que vous avez déjà et d’orienter vos prochains achats pour qu’ils soient plus réfléchis, sans dépenses inutiles."),
-            ("Combien de temps dure l’accompagnement ?",
-             "Comptez 2 à 3 heures de séance, selon vos besoins et vos objectifs."),
-        ],
-    },
-    {
-        "slug": "lookbook-digital",
-        "name": "Lookbook Digital",
-        "h1": "Lookbook digital personnalisé",
-        "seo_title": "Lookbook digital personnalisé en ligne",
-        "description": "Lookbook digital personnalisé pour affiner votre style : moodboard, direction esthétique, idées de tenues et suggestions de pièces. En ligne, CHF 190.–.",
-        "format": ["En ligne"],
-        "duration": "1 h 30 à 2 h",
-        "prices": [(190, "")],
-        "image": "lookbook-digital-tablette",
-        "image_alt": "Tablette posée sur un bureau affichant un tableau de tenues : combinaison marine et accessoires",
-        "lead": "Idéal pour affiner votre style et découvrir des inspirations concrètes à intégrer dans votre quotidien.",
-        "included": [
-            "Un questionnaire préparatoire",
-            "Un entretien individuel",
-            "Une analyse de votre style personnel",
-            "La définition d’une direction esthétique",
-            "Un moodboard personnalisé",
-            "Une sélection d’inspirations et d’associations de tenues",
-            "Des suggestions de vêtements, d’accessoires et de styling",
-            "Un lookbook digital personnalisé",
-        ],
-        "for_whom": [
-            "Vous savez ce qui vous plaît, sans toujours savoir comment le traduire en tenues.",
-            "Le matin, vous manquez d’inspiration et répétez les mêmes associations.",
-            "Vous préparez un changement (nouveau poste, nouvelle saison, nouvelle ville) et voulez une direction claire.",
-            "Vous aimez avoir des repères visuels à consulter sur votre téléphone.",
-        ],
-        "steps": [
-            ("Questionnaire préparatoire", "Vos goûts, votre quotidien et vos envies, pour préparer la séance."),
-            ("Entretien individuel", "Nous analysons votre style personnel et définissons ensemble une direction esthétique."),
-            ("Création", "Moodboard, sélection d’inspirations et d’associations de tenues, suggestions de vêtements, d’accessoires et de styling."),
-            ("Votre lookbook digital", "Un lookbook personnalisé, à consulter à tout moment pour composer vos tenues."),
-        ],
-        "faq": [
-            ("Qu’est-ce qu’un lookbook digital ?",
-             "C’est un document visuel, créé pour vous, qui rassemble votre direction esthétique, un moodboard et des idées de tenues concrètes, à consulter sur votre téléphone ou votre ordinateur."),
-            ("Quelle différence avec le conseil en image & style ?",
-             "Le lookbook se concentre sur votre direction esthétique et des idées de tenues. Le conseil en image & style va plus loin : il comprend aussi la colorimétrie, l’analyse des coupes, des silhouettes et des proportions, et un guide complet."),
-            ("Faut-il acheter les pièces suggérées ?",
-             "Non. Les suggestions servent de repères : vous pouvez les retrouver dans votre garde-robe, les adapter à votre budget ou vous en inspirer librement."),
-        ],
-    },
-    {
-        "slug": "colorimetrie-personnelle",
-        "name": "Colorimétrie personnelle",
-        "h1": "Colorimétrie personnelle en ligne",
-        "seo_title": "Colorimétrie personnelle en ligne",
-        "description": "Analyse de colorimétrie personnelle en ligne : votre palette, les harmonies qui vous vont, des conseils vêtements, accessoires et maquillage. CHF 99.–.",
-        "format": ["En ligne"],
-        "duration": "1 h à 1 h 30",
-        "prices": [(99, "")],
-        "image": "colorimetrie-nuanciers",
-        "image_alt": "Conseillère en blazer rouge disposant des cercles chromatiques et des nuanciers de tissus sur une table",
-        "lead": "Découvrez les couleurs qui mettent naturellement en valeur votre teint, vos yeux, vos cheveux et votre contraste personnel.",
-        "included": [
-            "Une analyse colorimétrique personnalisée",
-            "L’identification de votre palette de couleurs dominante",
-            "Des explications sur les harmonies de couleurs les plus adaptées",
-            "Des recommandations pour les vêtements, les accessoires et le maquillage",
-            "Une palette de couleurs personnalisée à consulter au quotidien",
-        ],
-        "for_whom": [
-            "En magasin, vous hésitez souvent entre deux teintes.",
-            "Certaines couleurs semblent éteindre votre teint, sans que vous sachiez pourquoi.",
-            "Vous voulez une garde-robe dont les pièces s’associent facilement.",
-            "Vous souhaitez choisir maquillage et accessoires avec plus d’assurance.",
-        ],
-        "steps": [
-            ("Prise de rendez-vous", "Vous m’écrivez ou m’appelez, et nous fixons ensemble la date de la séance en ligne."),
-            ("Analyse colorimétrique", "Nous étudions votre teint, vos yeux, vos cheveux et votre contraste pour identifier votre palette dominante."),
-            ("Harmonies & conseils", "Je vous explique les harmonies les plus adaptées et comment les porter : vêtements, accessoires, maquillage."),
-            ("Votre palette", "Vous recevez une palette personnalisée à consulter au quotidien, en magasin comme devant votre armoire."),
-        ],
-        "faq": [
-            ("Une analyse de colorimétrie en ligne est-elle fiable ?",
-             "Oui, avec quelques précautions simples : une lumière du jour douce et un visage peu maquillé pendant la séance permettent une lecture plus juste de votre teint et de vos contrastes."),
-            ("Que vais-je recevoir après la séance ?",
-             "Une palette de couleurs personnalisée à consulter au quotidien, accompagnée de recommandations pour vos vêtements, vos accessoires et votre maquillage."),
-            ("La colorimétrie est-elle incluse dans le conseil en image ?",
-             "Oui. L’accompagnement Conseil en image & style comprend une analyse de colorimétrie personnelle, en plus du travail sur les coupes, les silhouettes et votre style."),
-        ],
-    },
-]
+def load_settings() -> tuple[dict, dict, list[dict], list[tuple[str, str]]]:
+    data = json.loads((SRC / "content" / "settings.json").read_text(encoding="utf-8"))
+    c = data["contact"]
+    brand = {**c, "phone_href": re.sub(r"[^\d+]", "", c["phone"])}
+    services = []
+    for raw in data["services"]:
+        svc = dict(raw)
+        svc["prices"] = [(p["amount"], p.get("label", "")) for p in raw["prices"]]
+        svc["steps"] = [(x["title"], x["text"]) for x in raw.get("steps", [])]
+        svc["faq"] = [(x["q"], x["a"]) for x in raw.get("faq", [])]
+        services.append(svc)
+    return data, brand, services, [(x["q"], x["a"]) for x in data.get("home_faq", [])]
+
+
+SETTINGS, BRAND, SERVICES, HOME_FAQ = load_settings()
 SERVICE_BY_SLUG = {s["slug"]: s for s in SERVICES}
 
-HOME_FAQ = [
-    ("Qu’est-ce que le conseil en image ?",
-     "C’est une démarche stratégique qui vise à aligner votre image avec votre personnalité, vos objectifs de vie et votre parcours professionnel. Elle porte sur l’apparence, le comportement et la communication, pour construire une image cohérente, authentique et réfléchie."),
-    ("Quelle prestation choisir ?",
-     "Pour découvrir les couleurs qui vous mettent en valeur, commencez par la colorimétrie personnelle. Pour affiner votre style avec des idées de tenues concrètes, choisissez le lookbook digital. Pour un accompagnement global (couleurs, coupes, silhouettes, style et objectifs), optez pour le conseil en image & style."),
-    ("Les séances ont-elles lieu en ligne ou à Genève ?",
-     "La colorimétrie personnelle et le lookbook digital se déroulent en ligne. Le conseil en image & style est proposé en ligne ou en présentiel à Genève."),
-    ("Combien de temps dure une séance ?",
-     "Comptez 1 h à 1 h 30 pour la colorimétrie, 1 h 30 à 2 h pour le lookbook digital et 2 à 3 heures pour le conseil en image & style."),
-    ("Quels sont les tarifs ?",
-     "Colorimétrie personnelle : CHF 99.–. Lookbook digital : CHF 190.–. Conseil en image & style : CHF 320.– en ligne ou CHF 390.– en présentiel à Genève."),
-    ("Faut-il changer toute sa garde-robe ?",
-     "Non. Les recommandations sont adaptées à votre réalité et à votre mode de vie : on part de ce que vous avez déjà, et vos prochains achats deviennent plus réfléchis."),
-]
+_manifest = ASSETS / "img" / "manifest.json"
+if _manifest.exists():  # images ajoutées depuis l'admin (générées par tools/media.py)
+    IMAGES.update({k: (v["widths"], v["ratio"]) for k, v in json.loads(_manifest.read_text(encoding="utf-8")).items()})
+
+INSTAGRAM = json.loads((SRC / "content" / "instagram.json").read_text(encoding="utf-8")) \
+    if (SRC / "content" / "instagram.json").exists() else {"posts": []}
+
+
+def today_geneva() -> date:
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo("Europe/Zurich")).date()
+    except Exception:
+        return date.today()
+
+
+TODAY = today_geneva()
 
 # --------------------------------------------------------------------------
 # Outils
@@ -282,25 +161,73 @@ ICON_PHONE = '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-
 # Articles du blog
 # --------------------------------------------------------------------------
 
-def load_articles() -> list[dict]:
-    articles = []
+def read_article_files() -> list[dict]:
+    """Tous les fichiers d'articles, brouillons et articles programmés compris."""
+    items = []
     for path in sorted(BLOG_SRC.glob("*.html")):
         raw = path.read_text(encoding="utf-8")
         m = re.match(r"\s*<!--(.*?)-->(.*)", raw, re.S)
         if not m:
             raise SystemExit(f"{path}: en-tête JSON manquant")
-        meta = json.loads(m.group(1))
-        meta["slug"] = path.stem
+        items.append({"slug": path.stem, "meta": json.loads(m.group(1)), "body": m.group(2).strip()})
+    return items
+
+
+def is_live(meta: dict) -> bool:
+    return not meta.get("draft") and date.fromisoformat(meta["date"]) <= TODAY
+
+
+def load_articles() -> list[dict]:
+    articles, hidden = [], 0
+    for item in read_article_files():
+        meta = dict(item["meta"])
+        if not is_live(meta):
+            hidden += 1
+            continue
+        meta["slug"] = item["slug"]
         meta.setdefault("updated", meta["date"])
-        body = m.group(2).strip().replace("{{root}}", "~/")
+        meta.setdefault("order", 50)
+        body = render_media(item["body"].replace("{{root}}", "~/"))
         meta["body"] = body
         text = re.sub(r"<[^>]+>", " ", body)
         meta["words"] = len(text.split())
         meta["minutes"] = max(1, math.ceil(meta["words"] / 200))
         meta["toc"] = [(i, re.sub(r"<[^>]+>", "", t)) for i, t in re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)]
         articles.append(meta)
-    articles.sort(key=lambda a: (a.get("order", 99), a["slug"]))
+    if hidden:
+        print(f"{hidden} article(s) en brouillon ou programmé(s), non publiés")
+    # Les plus récents d'abord, puis l'ordre choisi
+    articles.sort(key=lambda a: (-date.fromisoformat(a["date"]).toordinal(), a["order"], a["slug"]))
     return articles
+
+
+def media_key(name: str | None) -> str | None:
+    """Nom d'image d'un article : clé courte historique ou nom de la médiathèque."""
+    if not name:
+        return None
+    key = PHOTO_KEYS.get(name, name)
+    return key if key in IMAGES else None
+
+
+def render_media(body: str) -> str:
+    """<figure class="media"><img data-media="NOM" alt="…"> → image responsive du site."""
+    def fig(m):
+        attrs, inner = m.group(1), m.group(2)
+        name = re.search(r'data-media="([^"]+)"', inner)
+        alt = re.search(r'alt="([^"]*)"', inner)
+        cap = re.search(r"<figcaption>(.*?)</figcaption>", inner, re.S)
+        key = media_key(name.group(1) if name else None)
+        if not key:
+            print(f"Image « {name.group(1) if name else '?'} » pas encore prête : ignorée")
+            return ""
+        ig = re.search(r'data-instagram="([^"]+)"', attrs)
+        caption = cap.group(1).strip() if cap else ""
+        if ig:
+            caption += f' <a href="{ig.group(1)}" target="_blank" rel="noopener">Voir sur Instagram</a>'
+        alt_text = html.unescape(alt.group(1)) if alt else ""
+        out = f'<figure class="media"><div class="frame">{img(key, alt_text, "(max-width: 1020px) 92vw, 720px")}</div>'
+        return out + (f"<figcaption>{caption.strip()}</figcaption>" if caption.strip() else "") + "</figure>"
+    return re.sub(r'<figure class="media"([^>]*)>(.*?)</figure>', fig, body, flags=re.S)
 
 
 def cover(serif: str, script: str, cls: str = "") -> str:
@@ -331,10 +258,10 @@ def header(is_home: bool, current: str | None) -> str:
         href = target if (is_home and target.startswith("#")) else f"~/{target}"
         cur = ' aria-current="page"' if current == target else ""
         items.append(f'<li><a href="{href}"{cur}>{label}</a></li>')
-    contact = "#contact" if is_home else "~/#contact"
-    items.append(f'<li><a class="btn btn--small" href="{contact}">Réserver</a></li>')
+    cur = ' aria-current="page"' if current == "reservation/" else ""
+    items.append(f'<li><a class="btn btn--small" href="~/reservation/"{cur}>Réserver</a></li>')
     return f"""<a class="skip" href="#contenu">Aller au contenu</a>
-<header class="site-header">
+{banner()}<header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="~/" aria-label="Liv Curty, accueil"><img src="~/assets/logo.svg" alt="Liv Curty" width="572" height="204"></a>
     <nav class="nav" aria-label="Navigation principale">
@@ -356,7 +283,7 @@ def footer(articles: list[dict]) -> str:
         <img src="~/assets/logo.svg" alt="Liv Curty" width="572" height="204" loading="lazy">
         <p>Conseil en image &amp; style à Genève et en ligne. Une approche bienveillante, sans jugement ni recettes toutes faites.</p>
       </div>
-      <div class="footer-col"><h2>Services</h2><ul>{services}<li><a href="~/#tarifs">Tarifs</a></li></ul></div>
+      <div class="footer-col"><h2>Services</h2><ul>{services}<li><a href="~/#tarifs">Tarifs</a></li><li><a href="~/reservation/">Réserver une séance</a></li></ul></div>
       <div class="footer-col"><h2>Blog</h2><ul>{posts}<li><a href="~/blog/">Tous les articles</a></li></ul></div>
       <div class="footer-col"><h2>Contact</h2><ul>
         <li><a href="mailto:{BRAND['email']}">{BRAND['email']}</a></li>
@@ -370,6 +297,46 @@ def footer(articles: list[dict]) -> str:
     </div>
   </div>
 </footer>"""
+
+
+def internal(link: str) -> str:
+    """Lien saisi dans l'admin : interne (relatif à la racine) ou externe."""
+    if re.match(r"^(https?:|mailto:|tel:|#)", link):
+        return link
+    return "~/" + link.lstrip("/")
+
+
+def banner() -> str:
+    b = SETTINGS.get("banner") or {}
+    if not (b.get("active") and b.get("text")):
+        return ""
+    link = f' <a href="{esc(internal(b["link"]))}">{esc(b.get("link_label") or "En savoir plus")}</a>' if b.get("link") else ""
+    return f'<div class="banner"><p class="wrap">{esc(b["text"])}{link}</p></div>\n'
+
+
+def instagram_posts(limit: int = 8) -> list[dict]:
+    return [p for p in INSTAGRAM.get("posts", []) if p.get("show_on_home") and f"ig-{p['id']}" in IMAGES][:limit]
+
+
+def instagram_section() -> str:
+    conf = SETTINGS.get("instagram") or {}
+    posts = instagram_posts()
+    if not (conf.get("show_on_home", True) and posts):
+        return ""
+    user = conf.get("username") or INSTAGRAM.get("username") or ""
+    follow = (f'<p><a class="link-arrow" href="https://www.instagram.com/{esc(user)}/" target="_blank" rel="noopener">Suivre @{esc(user)}</a></p>'
+              if user else "")
+    tiles = []
+    for p in posts:
+        photo = img(f"ig-{p['id']}", p.get("alt") or "Publication Instagram de Liv Curty", "(max-width: 600px) 46vw, 280px")
+        tiles.append(f'<li><a href="{esc(p["permalink"])}" target="_blank" rel="noopener"><div class="frame">{photo}</div>'
+                     '<span class="visually-hidden">Voir la publication sur Instagram</span></a></li>')
+    return f"""<section class="section section--tight insta" aria-labelledby="ig-title">
+  <div class="wrap">
+    <div class="section-head"><h2 class="section-title" id="ig-title">{esc(conf.get("home_title") or "Sur Instagram")}</h2>{follow}</div>
+    <ul class="insta-grid" style="--cols:{len(tiles) if len(tiles) <= 4 else 3 if len(tiles) <= 6 else 4}">{"".join(tiles)}</ul>
+  </div>
+</section>"""
 
 
 def breadcrumbs(items: list[tuple[str, str | None]]) -> tuple[str, dict]:
@@ -417,7 +384,7 @@ class Site:
     def render(self, *, path: str, title: str, description: str, body: str, schema: list[dict] | None = None,
                og_slug: str | None = None, og_type: str = "website", noindex: bool = False,
                lastmod: str = SITE_UPDATED, preload: str | None = None, root: str | None = None,
-               extra_meta: str = "") -> None:
+               extra_meta: str = "", extra_js: tuple[str, ...] = ()) -> None:
         if self.preview and path == "index.html":
             title = "Liv Curty"  # nom de l'aperçu dans la galerie claude.ai
         depth = path.count("/")
@@ -432,11 +399,11 @@ class Site:
                       '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
                       '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&amp;family=Mrs+Saint+Delafield&amp;family=Parkinsans:wght@300..700&amp;display=swap">'
                       "<style>@@CSS@@</style>")
-            script = "<script>@@JS@@</script>"
+            script = "<script>@@JS@@</script>" + "".join(f"<script>@@JS:{n}@@</script>" for n in extra_js)
         else:
             styles = ('<link rel="preload" href="~/assets/fonts/parkinsans-latin.woff2" as="font" type="font/woff2" crossorigin>'
                       '<link rel="stylesheet" href="~/assets/css/site.css">')
-            script = '<script src="~/assets/js/main.js" defer></script>'
+            script = "".join(f'<script src="~/assets/js/{n}" defer></script>' for n in ("main.js", *extra_js))
 
         head = f"""<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -474,6 +441,8 @@ class Site:
         if self.preview:
             doc = self._explicit_index(doc)
             doc = doc.replace("@@CSS@@", self._preview_css()).replace("@@JS@@", self.js)
+            for n in extra_js:
+                doc = doc.replace(f"@@JS:{n}@@", (ASSETS / "js" / n).read_text(encoding="utf-8"))
         target = self.out / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(re.sub(r"\n{3,}", "\n\n", doc), encoding="utf-8")
@@ -543,7 +512,7 @@ def page_home(site: Site, articles: list[dict]) -> None:
     <div class="hero-text">
       <h1 id="hero-title"><span class="kicker">Conseillère en image &amp; style à Genève</span><span class="hero-title">Une image qui vous <em>ressemble</em>.</span></h1>
       <p class="lead">Je vous accompagne pour construire une image qui renforce votre confiance en vous et exprime votre personnalité avec authenticité. Séances en ligne ou en présentiel à Genève.</p>
-      <div class="hero-cta"><a class="btn" href="#contact">Réserver une séance</a><a class="link-arrow" href="#services">Découvrir les services</a></div>
+      <div class="hero-cta"><a class="btn" href="~/reservation/">Réserver une séance</a><a class="link-arrow" href="#services">Découvrir les services</a></div>
     </div>
     <figure class="hero-visual">
       <div class="frame">{portrait}</div>
@@ -654,7 +623,7 @@ def page_home(site: Site, articles: list[dict]) -> None:
       <div>
         <ul class="price-list">{''.join(price_items)}</ul>
         <p class="pricing-note">Chaque accompagnement est personnalisé selon vos besoins, votre mode de vie et vos objectifs, afin de vous proposer des recommandations concrètes et adaptées à votre quotidien.</p>
-        <div class="pricing-cta"><a class="btn" href="#contact">Réserver une séance</a><a class="link-arrow" href="~/blog/prix-conseil-en-image-geneve/">Bien choisir sa prestation</a></div>
+        <div class="pricing-cta"><a class="btn" href="~/reservation/">Réserver une séance</a><a class="link-arrow" href="~/blog/prix-conseil-en-image-geneve/">Bien choisir sa prestation</a></div>
       </div>
     </div>
   </div>
@@ -678,6 +647,7 @@ def page_home(site: Site, articles: list[dict]) -> None:
   </div>
 </section>
 
+{instagram_section()}
 {contact_section()}
 </main>
 {footer(articles)}"""
@@ -766,6 +736,7 @@ def contact_section(heading: str = "h2") -> str:
           <li>{ICON_PHONE}<a href="tel:{BRAND['phone_href']}">{BRAND['phone']}</a></li>
         </ul>
         <p class="contact-place">Basée à Genève · séances en ligne ou en présentiel à Genève</p>
+        <p><a class="link-arrow" href="~/reservation/">Réserver directement un créneau</a></p>
       </div>
       <form class="form" id="contact-form" data-to="{BRAND['email']}">
         <h3>Demander un rendez-vous</h3>
@@ -821,7 +792,7 @@ def page_service(site: Site, s: dict, articles: list[dict]) -> None:
         <div><dt>Durée</dt><dd>{esc(s['duration'])}</dd></div>
         <div><dt>Tarif</dt>{prices}</div>
       </dl>
-      <div class="hero-cta"><a class="btn" href="#contact">Réserver cette prestation</a><a class="link-arrow" href="#inclus">Ce qui est inclus</a></div>
+      <div class="hero-cta"><a class="btn" href="~/reservation/#{s['slug']}">Réserver cette prestation</a><a class="link-arrow" href="#inclus">Ce qui est inclus</a></div>
     </div>
     <div class="frame">{img(s['image'], s['image_alt'], '(max-width: 860px) 92vw, 460px', eager=True)}</div>
   </div>
@@ -853,7 +824,7 @@ def page_service(site: Site, s: dict, articles: list[dict]) -> None:
       <span class="giant" aria-hidden="true">{esc(s['name'].split()[0])}</span>
       <div><p class="cta-title">{esc(s['name'])}</p>
       <p>{' · '.join(chf(p) + (f' {esc(l)}' if l else '') for p, l in s['prices'])} · {esc(s['duration'])}. Chaque accompagnement est personnalisé selon vos besoins, votre mode de vie et vos objectifs.</p></div>
-      <a class="btn" href="#contact">Réserver une séance</a>
+      <a class="btn" href="~/reservation/#{s['slug']}">Réserver une séance</a>
     </div>
   </div>
 </section>
@@ -957,16 +928,18 @@ def page_article(site: Site, a: dict, articles: list[dict]) -> None:
     service = SERVICE_BY_SLUG[a["service"]]
 
     body_html = a["body"]
-    if a.get("image"):
-        key = PHOTO_KEYS[a["image"]]
+    key = media_key(a.get("image"))
+    if key:
         fig = (f'<figure><div class="frame">{img(key, a.get("image_alt", ""), "(max-width: 1020px) 92vw, 720px")}</div>'
                f'<figcaption>{esc(a.get("image_alt", ""))}</figcaption></figure>')
-        body_html = body_html.replace("{{image}}", fig)
-    body_html = body_html.replace("{{image}}", "")
+        if "{{image}}" not in body_html:  # articles créés dans l'admin : photo après l'introduction
+            body_html = body_html.replace("</p>", "</p>\n{{image}}", 1)
+        body_html = body_html.replace("{{image}}", fig, 1)
+    body_html = re.sub(r"(<p>)?\{\{image\}\}(</p>)?", "", body_html)
     inline_cta = (f'<div class="inline-cta"><div class="cta-box"><div><p class="cta-title">{esc(service["name"])}</p>'
                   f'<p>{esc(service["lead"])} {esc(service["duration"])} · dès {chf(service["prices"][0][0])}.</p></div>'
                   f'<a class="btn" href="~/services/{service["slug"]}/">Découvrir la prestation</a></div></div>')
-    body_html = body_html.replace("{{cta}}", inline_cta)
+    body_html = re.sub(r"(<p>)?\{\{cta\}\}(</p>)?", lambda m: inline_cta, body_html)
 
     toc = "".join(f'<li><a href="#{i}">{esc(t)}</a></li>' for i, t in a["toc"])
     faq = ""
@@ -1039,8 +1012,122 @@ def page_article(site: Site, a: dict, articles: list[dict]) -> None:
     )
 
 
+def booking_options() -> list[dict]:
+    """Une option par prestation et par format tarifé (ex. conseil en image en ligne / à Genève)."""
+    options = []
+    for s in SERVICES:
+        if len(s["prices"]) > 1:
+            for amount, label in s["prices"]:
+                options.append({"id": f"{s['slug']}:{re.sub(r'[^a-z]+', '-', label.lower()).strip('-')}", "service": s["slug"],
+                                "name": s["name"], "format": label[0].upper() + label[1:], "price": amount,
+                                "duration": s["duration"], "minutes": s.get("duration_minutes", 120)})
+        else:
+            options.append({"id": f"{s['slug']}:{'en-ligne' if s['format'] == ['En ligne'] else 'standard'}", "service": s["slug"],
+                            "name": s["name"], "format": format_text(s["format"]), "price": s["prices"][0][0],
+                            "duration": s["duration"], "minutes": s.get("duration_minutes", 120)})
+    return sorted(options, key=lambda o: o["price"])
+
+
+def page_booking(site: Site, articles: list[dict]) -> None:
+    conf = SETTINGS.get("booking") or {}
+    crumbs, crumb_schema = breadcrumbs([("Accueil", ""), ("Réservation", None)])
+    options = booking_options()
+    radios = "".join(
+        f'<label class="b-option"><input type="radio" name="option" value="{o["id"]}" required>'
+        f'<span class="b-option-body"><span class="b-option-name">{esc(o["name"])}</span>'
+        f'<span class="b-option-meta">{esc(o["format"])} · {esc(o["duration"])}</span>'
+        f'<span class="b-option-price">{chf(o["price"])}</span></span></label>'
+        for o in options)
+    data = {
+        "email": BRAND["email"],
+        "provider": conf.get("provider", "email"),
+        "key": conf.get("web3forms_key", "") if conf.get("provider") == "web3forms" else "",
+        "rules": {k: conf.get(k) for k in ("timezone", "min_notice_hours", "horizon_days", "slot_step_minutes",
+                                             "buffer_minutes", "weekly", "closed", "booked")},
+        "options": options,
+    }
+    if conf.get("enabled", True):
+        app = f"""<div class="wrap booking-layout">
+    <form class="booking" id="booking-form">
+      <fieldset class="b-step">
+        <legend><span class="b-num">1</span>Votre prestation</legend>
+        <div class="b-options">{radios}</div>
+      </fieldset>
+      <fieldset class="b-step">
+        <legend><span class="b-num">2</span>Date et heure</legend>
+        <div class="b-cal" id="b-cal" hidden></div>
+        <div class="b-slots" id="b-slots" aria-live="polite"></div>
+        <div class="field b-nojs"><label for="b-dispo">Vos disponibilités</label><textarea id="b-dispo" name="dispo" placeholder="Par exemple : mardi ou jeudi après-midi"></textarea></div>
+        <p class="b-tz">Horaires affichés à l’heure de Genève.</p>
+      </fieldset>
+      <fieldset class="b-step">
+        <legend><span class="b-num">3</span>Vos coordonnées</legend>
+        <div class="form-row">
+          <div class="field"><label for="b-name">Prénom et nom</label><input id="b-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="b-email">E-mail</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="b-phone">Téléphone (facultatif)</label><input id="b-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="b-message">Un mot sur vos attentes (facultatif)</label><textarea id="b-message" name="message" placeholder="Votre objectif, une occasion particulière, une question…"></textarea></div>
+      </fieldset>
+    </form>
+    <div class="b-done" id="booking-done" tabindex="-1" hidden>
+      <p class="script b-done-sign">Merci</p>
+      <h2 class="subhead">Votre demande est bien envoyée</h2>
+      <p data-recap></p>
+      <p>{esc(conf.get("note", ""))}</p>
+      <p><a class="link-arrow" href="~/blog/">En attendant, découvrir le blog</a></p>
+    </div>
+    <aside class="b-summary" aria-label="Récapitulatif">
+      <p class="b-summary-title">Récapitulatif</p>
+      <dl>
+        <div><dt>Prestation</dt><dd id="sum-service">—</dd></div>
+        <div><dt>Format</dt><dd id="sum-format">—</dd></div>
+        <div><dt>Date</dt><dd id="sum-date">—</dd></div>
+        <div><dt>Heure</dt><dd id="sum-time">—</dd></div>
+        <div><dt>Tarif</dt><dd id="sum-price">—</dd></div>
+      </dl>
+      <p class="b-summary-note">Une question avant de réserver ? <a href="mailto:{BRAND['email']}">{BRAND['email']}</a> · <a href="tel:{BRAND['phone_href']}">{BRAND['phone']}</a></p>
+    </aside>
+    <div class="b-submit" id="b-submit">
+      <button class="btn" type="submit" form="booking-form">Envoyer ma demande</button>
+      <p class="form-note">{esc(conf.get("note", ""))}</p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+  <script type="application/json" id="booking-data">{json.dumps(data, ensure_ascii=False).replace("</", "<\\/")}</script>"""
+    else:
+        app = f"""<div class="wrap"><div class="cta-box"><div><p class="cta-title">Réservations en ligne momentanément fermées</p>
+    <p>Écrivez-moi à <a href="mailto:{BRAND['email']}">{BRAND['email']}</a> ou appelez le {BRAND['phone']} : nous trouverons une date ensemble.</p></div></div></div>"""
+
+    body = f"""{header(False, 'reservation/')}
+<main id="contenu">
+{crumbs}
+<section class="page-head">
+  <div class="wrap">
+    <p class="section-title" aria-hidden="true">Réservation</p>
+    <h1 class="page-title">Réserver une <em>séance</em></h1>
+    <p class="lead page-intro">Choisissez votre accompagnement et le créneau qui vous convient, en ligne ou en présentiel à Genève. Je vous confirme ensuite le rendez-vous par e-mail.</p>
+  </div>
+</section>
+<section class="section section--tight" style="padding-top:0">
+  {app}
+</section>
+</main>
+{footer(articles)}"""
+    site.render(path="reservation/index.html", title="Réserver une séance de conseil en image · Liv Curty",
+                description="Réservez votre séance avec Liv Curty : colorimétrie personnelle, lookbook digital ou conseil en image & style, en ligne ou à Genève.",
+                body=body, schema=[crumb_schema], og_slug=None, extra_js=("booking.js",))
+
+
 def page_legal(site: Site, articles: list[dict]) -> None:
     crumbs, crumb_schema = breadcrumbs([("Accueil", ""), ("Mentions légales & confidentialité", None)])
+    if (SETTINGS.get("booking") or {}).get("provider") == "web3forms":
+        booking_channel = ("par l’intermédiaire du service d’envoi de formulaires Web3Forms, qui la relaie par e-mail à Liv Curty "
+                           "sans la conserver au-delà de ce qui est nécessaire à l’envoi.")
+    else:
+        booking_channel = "par votre propre messagerie : le site prépare l’e-mail, rien n’est envoyé ni enregistré sans votre action."
+    insta_par = ("<p>Les photos Instagram affichées sur le site sont hébergées sur le site lui-même. Les liens « Voir sur Instagram » "
+                 "ouvrent le service Instagram (Meta), soumis à sa propre politique de confidentialité.</p>") if instagram_posts() or INSTAGRAM.get("posts") else ""
     body = f"""{header(False, None)}
 <main id="contenu">
 {crumbs}
@@ -1061,6 +1148,8 @@ def page_legal(site: Site, articles: list[dict]) -> None:
     <h2>Protection des données</h2>
     <p>Ce site respecte la loi fédérale sur la protection des données (nLPD). Il n’utilise ni cookies, ni outil de mesure d’audience, ni traceur publicitaire. Les polices de caractères sont hébergées sur le site lui-même : aucune donnée n’est transmise à un service tiers lors de votre visite.</p>
     <p>Le formulaire de contact n’envoie et n’enregistre aucune donnée : il prépare simplement un e-mail dans votre propre messagerie. Les informations que vous transmettez par e-mail ou par téléphone servent uniquement à répondre à votre demande et à organiser votre accompagnement. Elles ne sont ni vendues, ni cédées à des tiers.</p>
+    <p>La page de réservation transmet votre demande (prestation, créneau, nom, e-mail, téléphone et message) {booking_channel} Ces informations servent uniquement à confirmer et organiser votre rendez-vous.</p>
+    {insta_par}
     <p>Comme tout serveur web, l’hébergeur peut enregistrer des journaux techniques (adresse IP, date, page consultée) à des fins de sécurité. Vous pouvez à tout moment demander l’accès, la rectification ou la suppression de vos données en écrivant à <a href="mailto:{BRAND['email']}">{BRAND['email']}</a>.</p>
     <h2>Responsabilité</h2>
     <p>Les contenus du blog sont fournis à titre informatif et ne remplacent pas un accompagnement personnalisé. Liv Curty s’efforce de maintenir des informations exactes et à jour, sans garantie d’exhaustivité.</p>
@@ -1091,6 +1180,40 @@ def page_404(site: Site, articles: list[dict]) -> None:
                 body=body, noindex=True, root=None if site.preview else base)
 
 
+def write_admin(site: Site) -> None:
+    """Copie l'admin (src/admin) et ses données de démonstration (contenus déjà publics)."""
+    src = SRC / "admin"
+    if not src.exists():
+        return
+    out = site.out / "admin"
+    shutil.copytree(src, out, dirs_exist_ok=True)
+    manifest = ASSETS / "img" / "manifest.json"
+    demo = {
+        "articles": [{"slug": i["slug"], "meta": i["meta"], "body": i["body"]} for i in read_article_files() if is_live(i["meta"])],
+        "settings": SETTINGS,
+        "instagram": INSTAGRAM,
+        "manifest": json.loads(manifest.read_text(encoding="utf-8")) if manifest.exists() else {},
+    }
+    (out / "demo-data.json").write_text(json.dumps(demo, ensure_ascii=False), encoding="utf-8")
+    if manifest.exists():
+        shutil.copy2(manifest, site.out / "assets" / "img" / "manifest.json")
+    if site.preview:  # aperçu claude.ai : styles et script intégrés à la page
+        page = out / "index.html"
+        doc = page.read_text(encoding="utf-8")
+        fonts = ('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&amp;'
+                 'family=Mrs+Saint+Delafield&amp;family=Parkinsans:wght@300..700&amp;display=swap">')
+        site_css = f"<style>{site._preview_css()}</style>"
+        admin_css = f"<style>{(src / 'admin.css').read_text(encoding='utf-8')}</style>"
+        doc = re.sub(r'<link[^>]+href="\.\./assets/css/site\.css"[^>]*>', lambda m: fonts + site_css, doc)
+        doc = re.sub(r'<link[^>]+href="(\./)?admin\.css"[^>]*>', lambda m: admin_css, doc)
+        js = (src / "admin.js").read_text(encoding="utf-8")
+        doc = re.sub(r'<script[^>]+src="(\./)?admin\.js"[^>]*></script>', "", doc)
+        doc = doc.replace("</body>", f"<script>{js}</script>\n</body>")
+        page.write_text(doc, encoding="utf-8")
+        for name in ("admin.css", "admin.js"):
+            (out / name).unlink(missing_ok=True)
+
+
 def write_static(site: Site) -> None:
     out = site.out
     assets_out = out / "assets"
@@ -1101,18 +1224,21 @@ def write_static(site: Site) -> None:
     for name in ("logo.svg", "signature.svg", "favicon.svg", "apple-touch-icon.png", "logo.png"):
         if (ASSETS / name).exists():
             shutil.copy2(ASSETS / name, assets_out / name)
+    write_admin(site)
     if site.preview:
         return
     (assets_out / "css").mkdir(parents=True, exist_ok=True)
     (assets_out / "css" / "site.css").write_text(site.css, encoding="utf-8")
     (assets_out / "js").mkdir(parents=True, exist_ok=True)
-    shutil.copy2(ASSETS / "js" / "main.js", assets_out / "js" / "main.js")
+    for js in (ASSETS / "js").glob("*.js"):
+        shutil.copy2(js, assets_out / "js" / js.name)
     urls = "\n".join(
         f"  <url><loc>{abs_url(p)}</loc><lastmod>{m}</lastmod></url>" for p, m in site.pages)
     (out / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n',
         encoding="utf-8")
-    (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
+    base = urlparse(SITE_URL).path.rstrip("/")
+    (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: {base}/admin/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")
     domain = urlparse(SITE_URL).hostname or ""
     if not domain.endswith("github.io"):
@@ -1133,6 +1259,7 @@ def main() -> None:
     page_home(site, articles)
     for s in SERVICES:
         page_service(site, s, articles)
+    page_booking(site, articles)
     page_blog_index(site, articles)
     for a in articles:
         page_article(site, a, articles)

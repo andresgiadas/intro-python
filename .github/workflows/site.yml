@@ -1,0 +1,59 @@
+# Régénère le site après chaque modification faite depuis l'admin (ou à la main),
+# et chaque matin pour publier les articles programmés.
+name: site
+
+on:
+  push:
+    branches: [master, claude/website-blog-seo-hhhfr0]
+    paths: ["src/**", "build.py", "tools/**"]
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Images (uploads et Instagram)
+        run: |
+          pip install --quiet pillow
+          python tools/media.py
+
+      - name: Images de partage
+        continue-on-error: true
+        run: |
+          npm install --no-save --silent playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node tools/og.js
+
+      - name: Génération du site
+        run: python build.py
+
+      - name: Publication
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs src/assets src/media
+          if git diff --cached --quiet; then
+            echo "Rien à publier."
+            exit 0
+          fi
+          git commit -m "Site régénéré"
+          for attempt in 1 2 3; do
+            git pull --rebase --quiet origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 5
+          done
+          exit 1

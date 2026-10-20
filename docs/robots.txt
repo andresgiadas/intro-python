@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /intro-python/admin/
 
 Sitemap: https://andresgiadas.github.io/intro-python/sitemap.xml

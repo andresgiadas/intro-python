@@ -1,0 +1,48 @@
+{
+  "colorimetrie-nuanciers": {
+    "widths": [
+      480,
+      681
+    ],
+    "ratio": 1.5037
+  },
+  "conseil-en-image-blazer": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "ratio": 1.4983
+  },
+  "liv-curty-portrait": {
+    "widths": [
+      480,
+      563
+    ],
+    "ratio": 1.7762
+  },
+  "lookbook-digital-tablette": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "ratio": 1.2867
+  },
+  "manteau-rouge": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "ratio": 1.4633
+  },
+  "style-tailleur-orange": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "ratio": 1.5
+  }
+}

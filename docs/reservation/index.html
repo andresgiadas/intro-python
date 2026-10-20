@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Réserver une séance de conseil en image · Liv Curty</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Réservez votre séance avec Liv Curty : colorimétrie personnelle, lookbook digital ou conseil en image &amp; style, en ligne ou à Genève.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://andresgiadas.github.io/intro-python/reservation/">
+<link rel="alternate" hreflang="fr-CH" href="https://andresgiadas.github.io/intro-python/reservation/">
+<meta name="theme-color" content="#F7F1EE">
+<meta name="author" content="Olivia Curty">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_CH">
+<meta property="og:site_name" content="Liv Curty">
+<meta property="og:title" content="Réserver une séance de conseil en image · Liv Curty">
+<meta property="og:description" content="Réservez votre séance avec Liv Curty : colorimétrie personnelle, lookbook digital ou conseil en image &amp; style, en ligne ou à Genève.">
+<meta property="og:url" content="https://andresgiadas.github.io/intro-python/reservation/">
+<meta property="og:image" content="https://andresgiadas.github.io/intro-python/assets/og/default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<link rel="preload" href="../assets/fonts/parkinsans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://andresgiadas.github.io/intro-python/"},{"@type":"ListItem","position":2,"name":"Réservation"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../" aria-label="Liv Curty, accueil"><img src="../assets/logo.svg" alt="Liv Curty" width="572" height="204"></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+      <ul id="menu"><li><a href="../#a-propos">À propos</a></li><li><a href="../#services">Services</a></li><li><a href="../#tarifs">Tarifs</a></li><li><a href="../blog/">Blog</a></li><li><a class="btn btn--small" href="../reservation/" aria-current="page">Réserver</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+<nav class="crumbs wrap" aria-label="Fil d’Ariane"><ol><li><a href="../">Accueil</a></li><li aria-current="page">Réservation</li></ol></nav>
+<section class="page-head">
+  <div class="wrap">
+    <p class="section-title" aria-hidden="true">Réservation</p>
+    <h1 class="page-title">Réserver une <em>séance</em></h1>
+    <p class="lead page-intro">Choisissez votre accompagnement et le créneau qui vous convient, en ligne ou en présentiel à Genève. Je vous confirme ensuite le rendez-vous par e-mail.</p>
+  </div>
+</section>
+<section class="section section--tight" style="padding-top:0">
+  <div class="wrap booking-layout">
+    <form class="booking" id="booking-form">
+      <fieldset class="b-step">
+        <legend><span class="b-num">1</span>Votre prestation</legend>
+        <div class="b-options"><label class="b-option"><input type="radio" name="option" value="colorimetrie-personnelle:en-ligne" required><span class="b-option-body"><span class="b-option-name">Colorimétrie personnelle</span><span class="b-option-meta">En ligne · 1 h à 1 h 30</span><span class="b-option-price">CHF 99.–</span></span></label><label class="b-option"><input type="radio" name="option" value="lookbook-digital:en-ligne" required><span class="b-option-body"><span class="b-option-name">Lookbook Digital</span><span class="b-option-meta">En ligne · 1 h 30 à 2 h</span><span class="b-option-price">CHF 190.–</span></span></label><label class="b-option"><input type="radio" name="option" value="conseil-en-image-geneve:en-ligne" required><span class="b-option-body"><span class="b-option-name">Conseil en image &amp; style</span><span class="b-option-meta">En ligne · 2 à 3 heures</span><span class="b-option-price">CHF 320.–</span></span></label><label class="b-option"><input type="radio" name="option" value="conseil-en-image-geneve:en-pr-sentiel-gen-ve" required><span class="b-option-body"><span class="b-option-name">Conseil en image &amp; style</span><span class="b-option-meta">En présentiel à Genève · 2 à 3 heures</span><span class="b-option-price">CHF 390.–</span></span></label></div>
+      </fieldset>
+      <fieldset class="b-step">
+        <legend><span class="b-num">2</span>Date et heure</legend>
+        <div class="b-cal" id="b-cal" hidden></div>
+        <div class="b-slots" id="b-slots" aria-live="polite"></div>
+        <div class="field b-nojs"><label for="b-dispo">Vos disponibilités</label><textarea id="b-dispo" name="dispo" placeholder="Par exemple : mardi ou jeudi après-midi"></textarea></div>
+        <p class="b-tz">Horaires affichés à l’heure de Genève.</p>
+      </fieldset>
+      <fieldset class="b-step">
+        <legend><span class="b-num">3</span>Vos coordonnées</legend>
+        <div class="form-row">
+          <div class="field"><label for="b-name">Prénom et nom</label><input id="b-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="b-email">E-mail</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="b-phone">Téléphone (facultatif)</label><input id="b-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="b-message">Un mot sur vos attentes (facultatif)</label><textarea id="b-message" name="message" placeholder="Votre objectif, une occasion particulière, une question…"></textarea></div>
+      </fieldset>
+    </form>
+    <div class="b-done" id="booking-done" tabindex="-1" hidden>
+      <p class="script b-done-sign">Merci</p>
+      <h2 class="subhead">Votre demande est bien envoyée</h2>
+      <p data-recap></p>
+      <p>Votre demande est sans engagement : je vous confirme le rendez-vous par e-mail, avec les détails pratiques.</p>
+      <p><a class="link-arrow" href="../blog/">En attendant, découvrir le blog</a></p>
+    </div>
+    <aside class="b-summary" aria-label="Récapitulatif">
+      <p class="b-summary-title">Récapitulatif</p>
+      <dl>
+        <div><dt>Prestation</dt><dd id="sum-service">—</dd></div>
+        <div><dt>Format</dt><dd id="sum-format">—</dd></div>
+        <div><dt>Date</dt><dd id="sum-date">—</dd></div>
+        <div><dt>Heure</dt><dd id="sum-time">—</dd></div>
+        <div><dt>Tarif</dt><dd id="sum-price">—</dd></div>
+      </dl>
+      <p class="b-summary-note">Une question avant de réserver ? <a href="mailto:oliviacurty@outlook.com">oliviacurty@outlook.com</a> · <a href="tel:+41762125652">+41 76 212 56 52</a></p>
+    </aside>
+    <div class="b-submit" id="b-submit">
+      <button class="btn" type="submit" form="booking-form">Envoyer ma demande</button>
+      <p class="form-note">Votre demande est sans engagement : je vous confirme le rendez-vous par e-mail, avec les détails pratiques.</p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+  <script type="application/json" id="booking-data">{"email": "oliviacurty@outlook.com", "provider": "email", "key": "", "rules": {"timezone": "Europe/Zurich", "min_notice_hours": 48, "horizon_days": 60, "slot_step_minutes": 30, "buffer_minutes": 30, "weekly": {"1": [["09:00", "12:00"], ["13:30", "18:30"]], "2": [["09:00", "12:00"], ["13:30", "18:30"]], "3": [["09:00", "12:00"], ["13:30", "18:30"]], "4": [["09:00", "12:00"], ["13:30", "18:30"]], "5": [["09:00", "12:00"], ["13:30", "17:00"]], "6": [["09:30", "13:00"]], "7": []}, "closed": [], "booked": []}, "options": [{"id": "colorimetrie-personnelle:en-ligne", "service": "colorimetrie-personnelle", "name": "Colorimétrie personnelle", "format": "En ligne", "price": 99, "duration": "1 h à 1 h 30", "minutes": 90}, {"id": "lookbook-digital:en-ligne", "service": "lookbook-digital", "name": "Lookbook Digital", "format": "En ligne", "price": 190, "duration": "1 h 30 à 2 h", "minutes": 120}, {"id": "conseil-en-image-geneve:en-ligne", "service": "conseil-en-image-geneve", "name": "Conseil en image & style", "format": "En ligne", "price": 320, "duration": "2 à 3 heures", "minutes": 180}, {"id": "conseil-en-image-geneve:en-pr-sentiel-gen-ve", "service": "conseil-en-image-geneve", "name": "Conseil en image & style", "format": "En présentiel à Genève", "price": 390, "duration": "2 à 3 heures", "minutes": 180}]}</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/logo.svg" alt="Liv Curty" width="572" height="204" loading="lazy">
+        <p>Conseil en image &amp; style à Genève et en ligne. Une approche bienveillante, sans jugement ni recettes toutes faites.</p>
+      </div>
+      <div class="footer-col"><h2>Services</h2><ul><li><a href="../services/conseil-en-image-geneve/">Conseil en image &amp; style</a></li><li><a href="../services/lookbook-digital/">Lookbook Digital</a></li><li><a href="../services/colorimetrie-personnelle/">Colorimétrie personnelle</a></li><li><a href="../#tarifs">Tarifs</a></li><li><a href="../reservation/">Réserver une séance</a></li></ul></div>
+      <div class="footer-col"><h2>Blog</h2><ul><li><a href="../blog/conseil-en-image-definition/">Conseil en image : définition et déroulement</a></li><li><a href="../blog/colorimetrie-trouver-ses-couleurs/">Colorimétrie personnelle : trouver vos couleurs</a></li><li><a href="../blog/garde-robe-capsule/">Garde-robe capsule : la méthode pas à pas</a></li><li><a href="../blog/lookbook-digital-guide/">Lookbook digital : à quoi ça sert au quotidien ?</a></li><li><a href="../blog/">Tous les articles</a></li></ul></div>
+      <div class="footer-col"><h2>Contact</h2><ul>
+        <li><a href="mailto:oliviacurty@outlook.com">oliviacurty@outlook.com</a></li>
+        <li><a href="tel:+41762125652">+41 76 212 56 52</a></li>
+        <li>Genève, Suisse</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Liv Curty · Olivia Curty</p>
+      <p><a href="../mentions-legales/">Mentions légales &amp; confidentialité</a></p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js" defer></script><script src="../assets/js/booking.js" defer></script>
+</body>
+</html>

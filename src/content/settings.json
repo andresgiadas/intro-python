@@ -1,0 +1,333 @@
+{
+  "contact": {
+    "name": "Liv Curty",
+    "person": "Olivia Curty",
+    "job": "Conseillère en image & style",
+    "email": "oliviacurty@outlook.com",
+    "phone": "+41 76 212 56 52",
+    "city": "Genève"
+  },
+  "instagram": {
+    "username": "",
+    "show_on_home": true,
+    "home_title": "Sur Instagram"
+  },
+  "banner": {
+    "active": false,
+    "text": "",
+    "link_label": "",
+    "link": ""
+  },
+  "booking": {
+    "enabled": true,
+    "provider": "email",
+    "web3forms_key": "",
+    "timezone": "Europe/Zurich",
+    "min_notice_hours": 48,
+    "horizon_days": 60,
+    "slot_step_minutes": 30,
+    "buffer_minutes": 30,
+    "weekly": {
+      "1": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:30",
+          "18:30"
+        ]
+      ],
+      "2": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:30",
+          "18:30"
+        ]
+      ],
+      "3": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:30",
+          "18:30"
+        ]
+      ],
+      "4": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:30",
+          "18:30"
+        ]
+      ],
+      "5": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:30",
+          "17:00"
+        ]
+      ],
+      "6": [
+        [
+          "09:30",
+          "13:00"
+        ]
+      ],
+      "7": []
+    },
+    "closed": [],
+    "booked": [],
+    "note": "Votre demande est sans engagement : je vous confirme le rendez-vous par e-mail, avec les détails pratiques."
+  },
+  "services": [
+    {
+      "slug": "conseil-en-image-geneve",
+      "name": "Conseil en image & style",
+      "h1": "Conseil en image & style à Genève",
+      "seo_title": "Conseil en image & style à Genève",
+      "description": "Conseil en image & style à Genève ou en ligne : questionnaire, entretien, colorimétrie, coupes et silhouettes, guide personnalisé. Dès CHF 320.–.",
+      "format": [
+        "En ligne",
+        "Présentiel à Genève"
+      ],
+      "duration": "2 à 3 heures",
+      "duration_minutes": 180,
+      "prices": [
+        {
+          "amount": 320,
+          "label": "en ligne"
+        },
+        {
+          "amount": 390,
+          "label": "en présentiel à Genève"
+        }
+      ],
+      "image": "style-tailleur-orange",
+      "image_alt": "Femme en tailleur orange vif et haut zébré, lunettes de soleil à la main",
+      "lead": "Un accompagnement personnalisé pour construire une image en accord avec votre personnalité, votre mode de vie et vos objectifs.",
+      "included": [
+        "Un questionnaire préparatoire",
+        "Un entretien individuel approfondi",
+        "La définition de vos objectifs d’image",
+        "Une analyse de colorimétrie personnelle",
+        "Des conseils sur les coupes, les silhouettes et les proportions",
+        "Des suggestions de vêtements adaptés à votre style",
+        "Un guide personnalisé avec des recommandations et les prochaines étapes"
+      ],
+      "for_whom": [
+        "Vous traversez une transition : nouveau poste, reconversion, retour à l’emploi ou création d’entreprise.",
+        "Votre armoire est pleine, mais vous avez souvent l’impression de n’avoir rien à vous mettre.",
+        "Vous souhaitez gagner en présence et en assurance, au travail comme au quotidien.",
+        "Vous vous installez à Genève et voulez adapter votre image à un nouvel environnement."
+      ],
+      "steps": [
+        {
+          "title": "Questionnaire préparatoire",
+          "text": "Quelques questions pour cerner votre quotidien, vos envies et vos objectifs avant la séance."
+        },
+        {
+          "title": "Entretien approfondi",
+          "text": "Nous échangeons sur votre parcours, votre mode de vie et l’image que vous souhaitez transmettre, puis nous définissons vos objectifs d’image."
+        },
+        {
+          "title": "Analyse & conseils",
+          "text": "Colorimétrie personnelle, coupes, silhouettes et proportions : nous identifions ce qui vous met naturellement en valeur."
+        },
+        {
+          "title": "Votre guide personnalisé",
+          "text": "Vous repartez avec des recommandations concrètes, des suggestions de vêtements adaptés à votre style et les prochaines étapes."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quelle différence entre un conseil en image et un relooking ?",
+          "a": "Un relooking se concentre souvent sur un changement d’apparence ponctuel. Le conseil en image est une démarche plus globale : il aligne votre apparence, votre comportement et votre communication avec votre personnalité et vos objectifs, pour des repères durables."
+        },
+        {
+          "q": "La séance en ligne est-elle aussi complète qu’en présentiel ?",
+          "a": "Le contenu est le même : questionnaire, entretien, colorimétrie, conseils de coupes et de proportions, suggestions de vêtements et guide personnalisé. Le présentiel à Genève permet simplement d’échanger en face à face."
+        },
+        {
+          "q": "Dois-je racheter toute ma garde-robe ?",
+          "a": "Non. L’objectif est de mieux utiliser ce que vous avez déjà et d’orienter vos prochains achats pour qu’ils soient plus réfléchis, sans dépenses inutiles."
+        },
+        {
+          "q": "Combien de temps dure l’accompagnement ?",
+          "a": "Comptez 2 à 3 heures de séance, selon vos besoins et vos objectifs."
+        }
+      ]
+    },
+    {
+      "slug": "lookbook-digital",
+      "name": "Lookbook Digital",
+      "h1": "Lookbook digital personnalisé",
+      "seo_title": "Lookbook digital personnalisé en ligne",
+      "description": "Lookbook digital personnalisé pour affiner votre style : moodboard, direction esthétique, idées de tenues et suggestions de pièces. En ligne, CHF 190.–.",
+      "format": [
+        "En ligne"
+      ],
+      "duration": "1 h 30 à 2 h",
+      "duration_minutes": 120,
+      "prices": [
+        {
+          "amount": 190,
+          "label": ""
+        }
+      ],
+      "image": "lookbook-digital-tablette",
+      "image_alt": "Tablette posée sur un bureau affichant un tableau de tenues : combinaison marine et accessoires",
+      "lead": "Idéal pour affiner votre style et découvrir des inspirations concrètes à intégrer dans votre quotidien.",
+      "included": [
+        "Un questionnaire préparatoire",
+        "Un entretien individuel",
+        "Une analyse de votre style personnel",
+        "La définition d’une direction esthétique",
+        "Un moodboard personnalisé",
+        "Une sélection d’inspirations et d’associations de tenues",
+        "Des suggestions de vêtements, d’accessoires et de styling",
+        "Un lookbook digital personnalisé"
+      ],
+      "for_whom": [
+        "Vous savez ce qui vous plaît, sans toujours savoir comment le traduire en tenues.",
+        "Le matin, vous manquez d’inspiration et répétez les mêmes associations.",
+        "Vous préparez un changement (nouveau poste, nouvelle saison, nouvelle ville) et voulez une direction claire.",
+        "Vous aimez avoir des repères visuels à consulter sur votre téléphone."
+      ],
+      "steps": [
+        {
+          "title": "Questionnaire préparatoire",
+          "text": "Vos goûts, votre quotidien et vos envies, pour préparer la séance."
+        },
+        {
+          "title": "Entretien individuel",
+          "text": "Nous analysons votre style personnel et définissons ensemble une direction esthétique."
+        },
+        {
+          "title": "Création",
+          "text": "Moodboard, sélection d’inspirations et d’associations de tenues, suggestions de vêtements, d’accessoires et de styling."
+        },
+        {
+          "title": "Votre lookbook digital",
+          "text": "Un lookbook personnalisé, à consulter à tout moment pour composer vos tenues."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Qu’est-ce qu’un lookbook digital ?",
+          "a": "C’est un document visuel, créé pour vous, qui rassemble votre direction esthétique, un moodboard et des idées de tenues concrètes, à consulter sur votre téléphone ou votre ordinateur."
+        },
+        {
+          "q": "Quelle différence avec le conseil en image & style ?",
+          "a": "Le lookbook se concentre sur votre direction esthétique et des idées de tenues. Le conseil en image & style va plus loin : il comprend aussi la colorimétrie, l’analyse des coupes, des silhouettes et des proportions, et un guide complet."
+        },
+        {
+          "q": "Faut-il acheter les pièces suggérées ?",
+          "a": "Non. Les suggestions servent de repères : vous pouvez les retrouver dans votre garde-robe, les adapter à votre budget ou vous en inspirer librement."
+        }
+      ]
+    },
+    {
+      "slug": "colorimetrie-personnelle",
+      "name": "Colorimétrie personnelle",
+      "h1": "Colorimétrie personnelle en ligne",
+      "seo_title": "Colorimétrie personnelle en ligne",
+      "description": "Analyse de colorimétrie personnelle en ligne : votre palette, les harmonies qui vous vont, des conseils vêtements, accessoires et maquillage. CHF 99.–.",
+      "format": [
+        "En ligne"
+      ],
+      "duration": "1 h à 1 h 30",
+      "duration_minutes": 90,
+      "prices": [
+        {
+          "amount": 99,
+          "label": ""
+        }
+      ],
+      "image": "colorimetrie-nuanciers",
+      "image_alt": "Conseillère en blazer rouge disposant des cercles chromatiques et des nuanciers de tissus sur une table",
+      "lead": "Découvrez les couleurs qui mettent naturellement en valeur votre teint, vos yeux, vos cheveux et votre contraste personnel.",
+      "included": [
+        "Une analyse colorimétrique personnalisée",
+        "L’identification de votre palette de couleurs dominante",
+        "Des explications sur les harmonies de couleurs les plus adaptées",
+        "Des recommandations pour les vêtements, les accessoires et le maquillage",
+        "Une palette de couleurs personnalisée à consulter au quotidien"
+      ],
+      "for_whom": [
+        "En magasin, vous hésitez souvent entre deux teintes.",
+        "Certaines couleurs semblent éteindre votre teint, sans que vous sachiez pourquoi.",
+        "Vous voulez une garde-robe dont les pièces s’associent facilement.",
+        "Vous souhaitez choisir maquillage et accessoires avec plus d’assurance."
+      ],
+      "steps": [
+        {
+          "title": "Prise de rendez-vous",
+          "text": "Vous m’écrivez ou m’appelez, et nous fixons ensemble la date de la séance en ligne."
+        },
+        {
+          "title": "Analyse colorimétrique",
+          "text": "Nous étudions votre teint, vos yeux, vos cheveux et votre contraste pour identifier votre palette dominante."
+        },
+        {
+          "title": "Harmonies & conseils",
+          "text": "Je vous explique les harmonies les plus adaptées et comment les porter : vêtements, accessoires, maquillage."
+        },
+        {
+          "title": "Votre palette",
+          "text": "Vous recevez une palette personnalisée à consulter au quotidien, en magasin comme devant votre armoire."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Une analyse de colorimétrie en ligne est-elle fiable ?",
+          "a": "Oui, avec quelques précautions simples : une lumière du jour douce et un visage peu maquillé pendant la séance permettent une lecture plus juste de votre teint et de vos contrastes."
+        },
+        {
+          "q": "Que vais-je recevoir après la séance ?",
+          "a": "Une palette de couleurs personnalisée à consulter au quotidien, accompagnée de recommandations pour vos vêtements, vos accessoires et votre maquillage."
+        },
+        {
+          "q": "La colorimétrie est-elle incluse dans le conseil en image ?",
+          "a": "Oui. L’accompagnement Conseil en image & style comprend une analyse de colorimétrie personnelle, en plus du travail sur les coupes, les silhouettes et votre style."
+        }
+      ]
+    }
+  ],
+  "home_faq": [
+    {
+      "q": "Qu’est-ce que le conseil en image ?",
+      "a": "C’est une démarche stratégique qui vise à aligner votre image avec votre personnalité, vos objectifs de vie et votre parcours professionnel. Elle porte sur l’apparence, le comportement et la communication, pour construire une image cohérente, authentique et réfléchie."
+    },
+    {
+      "q": "Quelle prestation choisir ?",
+      "a": "Pour découvrir les couleurs qui vous mettent en valeur, commencez par la colorimétrie personnelle. Pour affiner votre style avec des idées de tenues concrètes, choisissez le lookbook digital. Pour un accompagnement global (couleurs, coupes, silhouettes, style et objectifs), optez pour le conseil en image & style."
+    },
+    {
+      "q": "Les séances ont-elles lieu en ligne ou à Genève ?",
+      "a": "La colorimétrie personnelle et le lookbook digital se déroulent en ligne. Le conseil en image & style est proposé en ligne ou en présentiel à Genève."
+    },
+    {
+      "q": "Combien de temps dure une séance ?",
+      "a": "Comptez 1 h à 1 h 30 pour la colorimétrie, 1 h 30 à 2 h pour le lookbook digital et 2 à 3 heures pour le conseil en image & style."
+    },
+    {
+      "q": "Quels sont les tarifs ?",
+      "a": "Colorimétrie personnelle : CHF 99.–. Lookbook digital : CHF 190.–. Conseil en image & style : CHF 320.– en ligne ou CHF 390.– en présentiel à Genève."
+    },
+    {
+      "q": "Faut-il changer toute sa garde-robe ?",
+      "a": "Non. Les recommandations sont adaptées à votre réalité et à votre mode de vie : on part de ce que vous avez déjà, et vos prochains achats deviennent plus réfléchis."
+    }
+  ]
+}
