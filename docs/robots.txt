@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andresgiadas.github.io/intro-python/sitemap.xml

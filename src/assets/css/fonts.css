@@ -1,0 +1,22 @@
+/* Polices auto-hébergées (SIL Open Font License) : aucune requête vers un service tiers. */
+@font-face {
+  font-family: "Parkinsans";
+  src: url("../fonts/parkinsans-latin.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("../fonts/bodoni-moda-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mrs Saint Delafield";
+  src: url("../fonts/mrs-saint-delafield-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
