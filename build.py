@@ -418,6 +418,8 @@ class Site:
                og_slug: str | None = None, og_type: str = "website", noindex: bool = False,
                lastmod: str = SITE_UPDATED, preload: str | None = None, root: str | None = None,
                extra_meta: str = "") -> None:
+        if self.preview and path == "index.html":
+            title = "Liv Curty"  # nom de l'aperçu dans la galerie claude.ai
         depth = path.count("/")
         if root is None:
             root = "../" * depth or "./"
