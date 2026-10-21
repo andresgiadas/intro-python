@@ -368,6 +368,21 @@ def business_ref() -> dict:
     return {"@id": f"{SITE_URL}/#business"}
 
 
+# Aperçu claude.ai : le visualiseur conserve la position de défilement d'une page à l'autre.
+# On remet chaque nouvelle page en haut (sauf lien vers une section #ancre ou rechargement).
+PREVIEW_SCROLL_TOP = (
+    "(function(){try{if(location.hash)return;"
+    "var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];"
+    "if(n&&n.type==='reload')return;"
+    "if('scrollRestoration' in history)history.scrollRestoration='manual';"
+    "var stop=false,top=function(){if(!stop)window.scrollTo(0,0);};"
+    "['wheel','touchstart','keydown','mousedown'].forEach(function(e){addEventListener(e,function(){stop=true;},{once:true,passive:true});});"
+    "top();addEventListener('DOMContentLoaded',top);"
+    "addEventListener('load',function(){top();[60,200,500,900].forEach(function(t){setTimeout(top,t);});});"
+    "}catch(e){}})();"
+)
+
+
 class Site:
     def __init__(self, out: Path, preview: bool):
         self.out = out
@@ -399,7 +414,8 @@ class Site:
                       '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
                       '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&amp;family=Mrs+Saint+Delafield&amp;family=Parkinsans:wght@300..700&amp;display=swap">'
                       "<style>@@CSS@@</style>")
-            script = "<script>@@JS@@</script>" + "".join(f"<script>@@JS:{n}@@</script>" for n in extra_js)
+            script = (f"<script>{PREVIEW_SCROLL_TOP}</script><script>@@JS@@</script>"
+                      + "".join(f"<script>@@JS:{n}@@</script>" for n in extra_js))
         else:
             styles = ('<link rel="preload" href="~/assets/fonts/parkinsans-latin.woff2" as="font" type="font/woff2" crossorigin>'
                       '<link rel="stylesheet" href="~/assets/css/site.css">')
@@ -1208,7 +1224,7 @@ def write_admin(site: Site) -> None:
         doc = re.sub(r'<link[^>]+href="(\./)?admin\.css"[^>]*>', lambda m: admin_css, doc)
         js = (src / "admin.js").read_text(encoding="utf-8")
         doc = re.sub(r'<script[^>]+src="(\./)?admin\.js"[^>]*></script>', "", doc)
-        doc = doc.replace("</body>", f"<script>{js}</script>\n</body>")
+        doc = doc.replace("</body>", f"<script>{PREVIEW_SCROLL_TOP}</script><script>{js}</script>\n</body>")
         page.write_text(doc, encoding="utf-8")
         for name in ("admin.css", "admin.js"):
             (out / name).unlink(missing_ok=True)
