@@ -275,7 +275,7 @@ a:hover .frame img, .frame:hover img { transform: scale(1.03); }
   background: linear-gradient(var(--plum), var(--plum)) 0 100% / 0 1.5px no-repeat;
   transition: background-size 0.35s var(--ease), color 0.2s;
 }
-.nav a:not(.btn):hover, .nav a[aria-current="page"] { background-size: 100% 1.5px; color: var(--plum); }
+.nav a:not(.btn):hover, .nav a:not(.btn)[aria-current="page"] { background-size: 100% 1.5px; color: var(--plum); }
 .nav-toggle {
   display: none;
   align-items: center; gap: 10px;

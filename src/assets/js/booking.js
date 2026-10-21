@@ -147,7 +147,15 @@
     sum.price.textContent = opt ? "CHF " + opt.price + ".–" : "—";
   }
 
-  function refresh() { renderCalendar(); renderSlots(); renderSummary(); }
+  // Les étapes suivantes n'apparaissent qu'une fois la prestation choisie
+  var later = [document.getElementById("b-step-date"), document.getElementById("b-step-contact"), document.getElementById("b-submit")];
+  function showLaterSteps() {
+    var wasHidden = later[0].hidden;
+    later.forEach(function (el) { if (el) el.hidden = !state.option; });
+    return wasHidden && !!state.option;
+  }
+
+  function refresh() { renderCalendar(); renderSlots(); renderSummary(); return showLaterSteps(); }
 
   // ---------- Interactions ----------
   form.addEventListener("change", function (e) {
@@ -157,7 +165,14 @@
     if (state.date && !slotsFor(state.date, opt.minutes).length) { state.date = null; }
     if (state.time && state.date && slotsFor(state.date, opt.minutes).indexOf(minutes(state.time)) < 0) state.time = null;
     if (!state.date) state.month = firstFreeMonth() || state.month;
-    refresh();
+    if (refresh()) {
+      // Première sélection : amener l'étape « Date et heure » à l'écran si elle est hors de vue
+      var step = later[0];
+      if (step.getBoundingClientRect().top > window.innerHeight - 80) {
+        var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        step.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+      }
+    }
   });
 
   calEl.addEventListener("click", function (e) {

@@ -1069,14 +1069,14 @@ def page_booking(site: Site, articles: list[dict]) -> None:
         <legend><span class="b-num">1</span>Votre prestation</legend>
         <div class="b-options">{radios}</div>
       </fieldset>
-      <fieldset class="b-step">
+      <fieldset class="b-step" id="b-step-date">
         <legend><span class="b-num">2</span>Date et heure</legend>
         <div class="b-cal" id="b-cal" hidden></div>
         <div class="b-slots" id="b-slots" aria-live="polite"></div>
         <div class="field b-nojs"><label for="b-dispo">Vos disponibilités</label><textarea id="b-dispo" name="dispo" placeholder="Par exemple : mardi ou jeudi après-midi"></textarea></div>
         <p class="b-tz">Horaires affichés à l’heure de Genève.</p>
       </fieldset>
-      <fieldset class="b-step">
+      <fieldset class="b-step" id="b-step-contact">
         <legend><span class="b-num">3</span>Vos coordonnées</legend>
         <div class="form-row">
           <div class="field"><label for="b-name">Prénom et nom</label><input id="b-name" name="name" autocomplete="name" required></div>
